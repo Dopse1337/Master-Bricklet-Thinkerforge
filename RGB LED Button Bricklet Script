@@ -1,5 +1,4 @@
 from tinkerforge.ip_connection import IPConnection
-from tinkerforge.bricklet_piezo_speaker_v2 import BrickletPiezoSpeakerV2
 from tinkerforge.bricklet_rgb_led_button import BrickletRGBLEDButton
 import time
  
