@@ -8,7 +8,6 @@ PORT = 4223
 UID  = "XyZ"            # <-- UID anpassen (aus Brick Viewer)
 
 # Noten: (Frequenz in Hz, Dauer in ms) | freq=0 -> Pause
-# Schulgong (Westminster Quarters)
 GTA_HUPE = [
     (830, 400), (0, 100),
     (784, 400), (0, 100),
