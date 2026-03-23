@@ -1,1 +1,39 @@
+#!/usr/bin/env python3
+from tinkerforge.ip_connection import IPConnection
+from tinkerforge.bricklet_piezo_speaker_v2 import BrickletPiezoSpeakerV2
+import time
 
+HOST = "192.168.1.100"  # <-- IP anpassen
+PORT = 4223
+UID  = "XyZ"            # <-- UID anpassen (aus Brick Viewer)
+
+# Noten: (Frequenz in Hz, Dauer in ms) | freq=0 -> Pause
+# Schulgong (Westminster Quarters)
+GTA_HUPE = [
+    (830, 400), (0, 100),
+    (784, 400), (0, 100),
+    (698, 400), (0, 100),
+    (523, 600), (0, 200),
+
+    (698, 400), (0, 100),
+    (784, 400), (0, 100),
+    (830, 400), (0, 100),
+    (698, 800),
+]
+
+ipcon = IPConnection()
+ps = BrickletPiezoSpeakerV2(UID, ipcon)
+ipcon.connect(HOST, PORT)
+
+print("Schulgong (Westminster) - Volume 2")
+
+for freq, duration in GTA_HUPE:
+
+    if freq == 0:
+        time.sleep(duration / 1000.0)
+    else:
+        ps.set_beep(frequency=freq, volume=2, duration=duration)
+        time.sleep((duration + 50) / 1000.0)  # +50ms Luft zwischen Noten
+
+print("Fertig.")
+ipcon.disconnect()
